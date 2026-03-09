@@ -1,0 +1,5 @@
+{
+  "domain": "technology",
+  "event_title": "WIRED Implements User Privacy Consent Management",
+  "summary": "WIRED provides users with tools to manage their consent preferences for various types of cookies and to opt-out of targeted advertising, particularly for residents of US states with specific data privacy rights.",
+  "impact": "Highlights the increasing
