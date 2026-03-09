@@ -7,7 +7,7 @@ from config import config
 OPENROUTER_API_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Using NVIDIA free model via OpenRouter
-MODEL = "nvidia/llama-nemotron-embed-vl-1b-v2:free"
+MODEL = "nvidia/nemotron-3-nano-30b-a3b:free"
 
 
 def analyze_content(text, domain="general"):

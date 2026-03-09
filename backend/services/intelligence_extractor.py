@@ -342,11 +342,20 @@ def store_intelligence(data, source_url):
                 db.table("relationships").insert(rel_records).execute()
                 print(f"[Intelligence] Stored {len(rel_records)} relationships")
 
+        # Run the modular Knowledge Graph Creation pipeline
+        try:
+            from services.knowledge_graph import build_knowledge_graph
+            kg_result = build_knowledge_graph(data, data.get("domain", "geopolitics"))
+            print(f"[Intelligence] Knowledge Graph synced: {len(kg_result['nodes'])} nodes, {len(kg_result['edges'])} edges")
+        except Exception as kg_e:
+            print(f"[Intelligence] Failed to build knowledge graph: {kg_e}")
+
         # Return full event data
         return {
             **event_result.data[0],
             "entities": entities,
             "relationships": relationships,
+            "knowledge_graph": kg_result if 'kg_result' in locals() else None,
         }
 
     except Exception as e:

@@ -1,5 +1,18 @@
 {
-  "domain": "technology",
-  "event_title": "WIRED Implements User Privacy Consent Management",
-  "summary": "WIRED provides users with tools to manage their consent preferences for various types of cookies and to opt-out of targeted advertising, particularly for residents of US states with specific data privacy rights.",
-  "impact": "Highlights the increasing
+  "domain": "climate",
+  "event_title": "Future of Conflict: Climate, Environment and Conflict",
+  "summary": "The Crisis Group highlights how climate change and environmental stressors intensify geopolitical tensions and increase conflict risk worldwide.",
+  "impact": "Escalating competition over scarce natural resources undermines stability, influencing global security and economic systems.",
+  "timestamp": "2022-08-29T18:09:43+02:00",
+  "entities": [
+    {
+      "name": "Crisis Group",
+      "type": "organization"
+    },
+    {
+      "name": "UNMISS",
+      "type": "organization"
+    }
+  ],
+  "relationships": []
+}

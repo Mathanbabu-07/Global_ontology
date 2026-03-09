@@ -80,6 +80,48 @@ def get_graph():
         return jsonify({"nodes": [], "edges": []}), 500
 
 
+@graph_bp.route("/global_graph", methods=["GET"])
+def get_global_graph():
+    """Retrieve the advanced global knowledge graph from Entities and Relationships."""
+    try:
+        db = create_client(config.SUPABASE_URL, config.SUPABASE_ANON_KEY)
+        
+        nodes_result = db.table("Entities").select("*").execute()
+        edges_result = db.table("Relationships").select("*").execute()
+        
+        nodes_data = nodes_result.data or []
+        edges_data = edges_result.data or []
+        
+        # Format for React Flow / Vis Network as required by the modular pipeline
+        formatted_nodes = [
+            {
+                "id": n["id"],
+                "label": n["label"],
+                "type": n["type"]
+            }
+            for n in nodes_data
+        ]
+        
+        formatted_edges = [
+            {
+                "source": e["source"],
+                "target": e["target"],
+                "label": e["relation"],
+                "confidence": e["confidence"]
+            }
+            for e in edges_data
+        ]
+        
+        return jsonify({
+            "nodes": formatted_nodes,
+            "edges": formatted_edges
+        }), 200
+
+    except Exception as e:
+        print(f"[Graph API] Global Graph Error: {e}")
+        return jsonify({"nodes": [], "edges": []}), 500
+
+
 @graph_bp.route("/events", methods=["GET"])
 def get_events():
     """Fetch all extracted intelligence events from Supabase to list in Chatbox."""
