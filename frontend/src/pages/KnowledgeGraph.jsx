@@ -12,6 +12,7 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import * as d3 from 'd3-force';
+import API from '../services/api';
 
 // Main Component Wrapper to provide ReactFlow context
 export default function KnowledgeGraph() {
@@ -43,9 +44,8 @@ function KnowledgeGraphInner() {
 
     const fetchEvents = async () => {
         try {
-            const res = await fetch('/api/events');
-            const data = await res.json();
-            setEvents(data);
+            const res = await API.get('/events');
+            setEvents(res.data);
         } catch (err) {
             console.error(err);
         }
@@ -76,12 +76,8 @@ function KnowledgeGraphInner() {
         setChatHistory(prev => [...prev, { role: 'user', text: `Please relate the ${idsArray.length} selected events.` }]);
 
         try {
-            const res = await fetch('/api/relate', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ event_ids: idsArray })
-            });
-            const data = await res.json();
+            const res = await API.post('/relate', { event_ids: idsArray });
+            const data = res.data;
 
             if (data.error) throw new Error(data.error);
 
