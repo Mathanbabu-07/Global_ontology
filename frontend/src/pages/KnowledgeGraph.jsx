@@ -43,7 +43,7 @@ function KnowledgeGraphInner() {
 
     const fetchEvents = async () => {
         try {
-            const res = await fetch('http://localhost:5000/events');
+            const res = await fetch('/api/events');
             const data = await res.json();
             setEvents(data);
         } catch (err) {
@@ -76,7 +76,7 @@ function KnowledgeGraphInner() {
         setChatHistory(prev => [...prev, { role: 'user', text: `Please relate the ${idsArray.length} selected events.` }]);
 
         try {
-            const res = await fetch('http://localhost:5000/relate', {
+            const res = await fetch('/api/relate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ event_ids: idsArray })
