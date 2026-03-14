@@ -1,7 +1,8 @@
 import axios from 'axios';
 
+// In production, Vite uses the env variable. In dev, it usually falls back to localhost proxy via '/api'.
 const API = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
   headers: { 'Content-Type': 'application/json' },
   timeout: 120000, // 120 seconds for slow AI models
 });

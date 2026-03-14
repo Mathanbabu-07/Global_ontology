@@ -26,15 +26,16 @@ def create_app():
 
 app = create_app()
 
-if __name__ == "__main__":
-    # Start the background scheduler
-    from services.scheduler import start_scheduler
-    try:
-        start_scheduler()
-        print("[Scheduler] Background scheduler started")
-    except Exception as e:
-        print(f"[Scheduler] Warning: Could not start scheduler: {e}")
+# Start the background scheduler outside the __main__ block 
+# so Gunicorn executes it when importing the app
+from services.scheduler import start_scheduler
+try:
+    start_scheduler()
+    print("[Scheduler] Background scheduler started")
+except Exception as e:
+    print(f"[Scheduler] Warning: Could not start scheduler: {e}")
 
+if __name__ == "__main__":
     print("=" * 50)
     print("  Global Ontology Engine - Backend API")
     print("  Running on http://localhost:5000")
