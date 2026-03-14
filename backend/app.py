@@ -10,10 +10,16 @@ def create_app():
     app.config.from_object(config)
 
     # Enable CORS for frontend (Netlify / Vercel etc.)
-    CORS(app, resources={r"/*": {"origins": "*"}})
+    CORS(
+        app,
+        resources={r"/*": {"origins": "*"}},
+        allow_headers=["Content-Type", "Authorization"],
+        methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+        supports_credentials=True
+    )
 
     # -------------------------
-    # Root route (health check)
+    # Health check route
     # -------------------------
     @app.route("/")
     def home():
@@ -21,6 +27,16 @@ def create_app():
             "status": "Global Ontology Engine Backend Running",
             "service": "AI Intelligence Engine API"
         })
+
+    # -------------------------
+    # Add headers for preflight requests
+    # -------------------------
+    @app.after_request
+    def add_headers(response):
+        response.headers["Access-Control-Allow-Origin"] = "*"
+        response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization"
+        response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+        return response
 
     # -------------------------
     # Register API Blueprints
