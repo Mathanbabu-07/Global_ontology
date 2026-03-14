@@ -14,12 +14,12 @@ def create_app():
     from routes.intelligence import intelligence_bp
     from routes.graph import graph_bp
 
-    app.register_blueprint(sources_bp, url_prefix='/api')
-    app.register_blueprint(monitor_bp, url_prefix='/api')
-    app.register_blueprint(query_bp, url_prefix='/api')
-    app.register_blueprint(dashboard_bp, url_prefix='/api')
-    app.register_blueprint(intelligence_bp, url_prefix='/api')
-    app.register_blueprint(graph_bp, url_prefix='/api')
+    app.register_blueprint(sources_bp)
+    app.register_blueprint(monitor_bp)
+    app.register_blueprint(query_bp)
+    app.register_blueprint(dashboard_bp)
+    app.register_blueprint(intelligence_bp)
+    app.register_blueprint(graph_bp)
 
     return app
 
