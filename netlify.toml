@@ -1,0 +1,13 @@
+[build]
+  # Tell Netlify to run the root package.json build script (which proxies to frontend)
+  command = "npm run build"
+  
+  # Tell Netlify where the compiled Vite files are located
+  publish = "frontend/dist"
+
+[[redirects]]
+  # This is crucial for React/Vite Router to work. 
+  # It routes all 404s back to index.html so React can handle the URL.
+  from = "/*"
+  to = "/index.html"
+  status = 200
