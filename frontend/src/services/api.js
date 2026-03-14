@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://global-ontology-1.onrender.com";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://global-ontology-2.onrender.com";
 
 const API = axios.create({
   baseURL: API_BASE,
