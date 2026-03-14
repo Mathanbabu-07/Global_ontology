@@ -1,10 +1,11 @@
 import axios from 'axios';
 
-// In production, Vite uses the env variable. In dev, it usually falls back to localhost proxy via '/api'.
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "https://global-ontology-1.onrender.com";
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+  baseURL: API_BASE,
   headers: { 'Content-Type': 'application/json' },
-  timeout: 120000, // 120 seconds for slow AI models
+  timeout: 120000,
 });
 
 export const addSource = (data) => API.post('/add_source', data);
